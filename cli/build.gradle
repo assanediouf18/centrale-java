@@ -1,0 +1,23 @@
+plugins {
+    id 'application'
+}
+
+group = 'org.centrale.cli'
+version = 'unspecified'
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    mainClass = 'org.centrale.cli.App'
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.9.1')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
