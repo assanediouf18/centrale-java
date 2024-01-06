@@ -12,7 +12,6 @@ public class App {
         System.out.println("Veuillez saisir votre choix");
         int choix = sc.nextInt();
         System.out.println(choix);
-        Pierre pierre = new Pierre();
 
     }
 
