@@ -1,9 +1,11 @@
 plugins {
+    id 'java'
     id 'application'
 }
 
 group = 'org.centrale.cli'
 version = 'unspecified'
+
 
 repositories {
     mavenCentral()
@@ -11,6 +13,16 @@ repositories {
 
 application {
     mainClass = 'org.centrale.cli.App'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.centrale.cli.App'
+    }
+}
+
+run {
+    standardInput = System.in
 }
 
 dependencies {
