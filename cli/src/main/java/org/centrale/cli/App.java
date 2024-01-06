@@ -1,7 +1,6 @@
 package org.centrale.cli;
 
 import java.util.Scanner;
-import org.centrale.domain.Pierre;
 
 public class App {
 
