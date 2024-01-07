@@ -20,7 +20,7 @@ class ExampleControllerTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    void testExampleController() throws Exception {
+    void testExampleController() {
         ResponseEntity<String> response = this.restTemplate.getForEntity("http://localhost:" + port + "/test?param=Hello",
                 String.class);
         assertEquals(response.getBody(), "Hello");
