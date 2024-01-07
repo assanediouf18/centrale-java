@@ -1,4 +1,5 @@
 rootProject.name = 'centrale-java'
 include 'domain'
 include 'cli'
+include 'api'
 
