@@ -1,0 +1,15 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.1'
+}
+
+group = 'org.centrale.api'
+version = 'unspecified'
+
+dependencies {
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '3.2.1'
+}
+
+repositories {
+    mavenCentral()
+}
