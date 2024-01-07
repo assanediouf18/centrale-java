@@ -8,8 +8,13 @@ version = 'unspecified'
 
 dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '3.2.1'
+    testImplementation group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '3.2.1'
 }
 
 repositories {
     mavenCentral()
+}
+
+test {
+    useJUnitPlatform()
 }
