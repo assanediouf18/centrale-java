@@ -1,4 +1,4 @@
-package org.centrale.domain;
+package org.centrale.domain.shifumi;
 
 import lombok.NoArgsConstructor;
 
@@ -8,7 +8,7 @@ public class Pierre implements Hand {
 
     @Override
     public int playWith(Hand h) {
-        return h.playWithPierre(this);
+        return -h.playWithPierre(this);
     }
 
     @Override
@@ -24,5 +24,10 @@ public class Pierre implements Hand {
     @Override
     public int playWithFeuille(Feuille f) {
         return -1;
+    }
+
+    @Override
+    public String getHandName() {
+        return "Pierre";
     }
 }

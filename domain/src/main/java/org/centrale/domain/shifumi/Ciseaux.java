@@ -1,4 +1,4 @@
-package org.centrale.domain;
+package org.centrale.domain.shifumi;
 
 import lombok.NoArgsConstructor;
 
@@ -7,7 +7,7 @@ public class Ciseaux implements Hand{
 
     @Override
     public int playWith(Hand h) {
-        return h.playWithCiseaux(this);
+        return -h.playWithCiseaux(this);
     }
 
     @Override
@@ -23,5 +23,10 @@ public class Ciseaux implements Hand{
     @Override
     public int playWithFeuille(Feuille f) {
         return 1;
+    }
+
+    @Override
+    public String getHandName() {
+        return "Ciseaux";
     }
 }

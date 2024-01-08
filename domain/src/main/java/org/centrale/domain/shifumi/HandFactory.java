@@ -1,4 +1,4 @@
-package org.centrale.domain;
+package org.centrale.domain.shifumi;
 
 public class HandFactory {
 

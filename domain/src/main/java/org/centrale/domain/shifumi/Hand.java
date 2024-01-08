@@ -1,4 +1,4 @@
-package org.centrale.domain;
+package org.centrale.domain.shifumi;
 
 public interface Hand {
 
@@ -9,5 +9,7 @@ public interface Hand {
     int playWithCiseaux(Ciseaux c);
 
     int playWithFeuille(Feuille f);
+
+    String getHandName();
 
 }
