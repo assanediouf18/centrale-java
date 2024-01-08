@@ -3,11 +3,16 @@ package org.centrale.domain.tourniquet;
 public class EtatOuvert implements State {
     @Override
     public State insererTicketValide() {
-        return new EtatOuvert();
+        return this;
     }
 
     @Override
     public State insererTicketInvalide() {
+        return new EtatBloque();
+    }
+
+    @Override
+    public State tourner() {
         return new EtatBloque();
     }
 

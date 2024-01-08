@@ -1,4 +1,4 @@
-package org.centrale.domain;
+package org.centrale.domain.shifumi;
 
 import org.centrale.domain.shifumi.Ciseaux;
 import org.centrale.domain.shifumi.Feuille;

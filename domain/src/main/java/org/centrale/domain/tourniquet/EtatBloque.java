@@ -9,7 +9,12 @@ public class EtatBloque implements State {
 
     @Override
     public State insererTicketInvalide() {
-        return new EtatBloque();
+        return this;
+    }
+
+    @Override
+    public State tourner() {
+        return this;
     }
 
     @Override
