@@ -1,14 +1,21 @@
 package org.centrale.cli;
 
+import org.centrale.domain.newsletter.*;
 import org.centrale.domain.shifumi.Hand;
 import org.centrale.domain.shifumi.HandFactory;
+import org.centrale.domain.shifumi.Pierre;
 import org.centrale.domain.shifumi.Shifumi;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
 
     public static void main(String[] args) {
+        App.NewsletterExample();
+    }
+
+    public static void PierreFeuilleCiseau() {
         System.out.println("Bienvenue sur le CLI du Pierre - Feuille - Ciseau");
 
         Shifumi jeu = new Shifumi();
@@ -39,7 +46,20 @@ public class App {
         } else {
             System.out.println("Tu as perdu, est-ce que tu veux prendre ta revanche ?");
         }
+    }
 
+    public static void NewsletterExample()
+    {
+        FanBoySubscriber fanBoy = new FanBoySubscriber();
+        UnhappySubsciber unhappySubsciber = new UnhappySubsciber();
+        CustomSubscriber customSubscriber = new CustomSubscriber("Jonathan", "Qu'est-ce qui est jaune et qui attend ?");
+
+        Newsletter newsletter = new Newsletter();
+        newsletter.addSubscriber(fanBoy);
+        newsletter.addSubscriber(unhappySubsciber);
+        newsletter.addSubscriber(customSubscriber);
+
+        newsletter.sendEmail("Bienvenu dans ma newsletter inutile !");
     }
 
 }
