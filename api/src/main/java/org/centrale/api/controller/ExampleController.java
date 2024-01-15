@@ -1,5 +1,7 @@
 package org.centrale.api.controller;
 
+import org.centrale.api.GameEntity;
+import org.centrale.api.GameRepository;
 import org.centrale.api.service.PlayerDBService;
 import org.centrale.domain.shifumi.Hand;
 import org.centrale.domain.shifumi.HandFactory;
@@ -15,9 +17,11 @@ import java.util.Objects;
 public class ExampleController {
 
     final PlayerDBService playerDBService;
+    final GameRepository gameRepository;
 
-    public ExampleController(PlayerDBService playerDBService) {
+    public ExampleController(PlayerDBService playerDBService, GameRepository gameRepository) {
         this.playerDBService = playerDBService;
+        this.gameRepository = gameRepository;
     }
 
     @GetMapping("test")
@@ -46,5 +50,13 @@ public class ExampleController {
     @PostMapping("/add")
     public void addPlayer(@RequestParam Integer id, @RequestParam String name) {
         playerDBService.addPlayer(id, name);
+    }
+
+    @PostMapping("/addgame")
+    public void addGame(@RequestParam Integer id, @RequestParam String description) {
+        GameEntity game = new GameEntity();
+        game.setId(id);
+        game.setDescription(description);
+        gameRepository.save(game);
     }
 }
