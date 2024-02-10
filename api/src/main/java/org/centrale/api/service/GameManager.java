@@ -1,5 +1,7 @@
 package org.centrale.api.service;
 
+import org.centrale.api.ShifumiEntity;
+import org.centrale.api.ShifumiRepository;
 import org.centrale.domain.shifumi.Hand;
 import org.centrale.domain.shifumi.HandFactory;
 import org.centrale.domain.shifumi.Shifumi;
@@ -32,15 +34,14 @@ public class GameManager {
         return players;
     }
 
-    public boolean addPlayer(String name)
+    public void addPlayer(String name)
     {
         if(players.size() >= 2) {
-            return false;
+            return;
         }
         players.add(name);
         scores.add(0);
         roundHands.add(null);
-        return true;
     }
 
     public void setPlayerHand(String player, String hand) throws Exception {
@@ -54,6 +55,12 @@ public class GameManager {
             }
         }
         handsTillNextRound = sum;
+    }
+
+    public void setPlayerScore(String playerName, int score)
+    {
+        int index = players.indexOf(playerName);
+        scores.set(index, score);
     }
 
     public List<String> getCurrentHands()
