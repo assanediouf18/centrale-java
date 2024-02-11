@@ -1,7 +1,7 @@
 package org.centrale.api.service;
 
-import org.centrale.api.ShifumiEntity;
-import org.centrale.api.ShifumiRepository;
+import org.centrale.api.entity.ShifumiEntity;
+import org.centrale.api.repository.ShifumiRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;

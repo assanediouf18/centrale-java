@@ -1,7 +1,7 @@
 package org.centrale.api.controller;
 
-import org.centrale.api.GameEntity;
-import org.centrale.api.GameRepository;
+import org.centrale.api.entity.GameEntity;
+import org.centrale.api.repository.GameRepository;
 import org.centrale.api.service.PlayerDBService;
 import org.centrale.domain.shifumi.Hand;
 import org.centrale.domain.shifumi.HandFactory;

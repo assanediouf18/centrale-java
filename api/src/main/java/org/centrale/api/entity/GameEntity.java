@@ -1,4 +1,4 @@
-package org.centrale.api;
+package org.centrale.api.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

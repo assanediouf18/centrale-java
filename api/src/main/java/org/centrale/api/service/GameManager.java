@@ -1,7 +1,5 @@
 package org.centrale.api.service;
 
-import org.centrale.api.ShifumiEntity;
-import org.centrale.api.ShifumiRepository;
 import org.centrale.domain.shifumi.Hand;
 import org.centrale.domain.shifumi.HandFactory;
 import org.centrale.domain.shifumi.Shifumi;
