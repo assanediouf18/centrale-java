@@ -1,5 +1,6 @@
 package org.centrale.api.service;
 
+import org.centrale.api.entity.PlayerEntity;
 import org.centrale.domain.shifumi.Hand;
 import org.centrale.domain.shifumi.HandFactory;
 import org.centrale.domain.shifumi.Shifumi;
@@ -11,7 +12,7 @@ import java.util.List;
 @Component
 public class GameManager {
     private final Shifumi jeu;
-    private List<String> players;
+    private List<PlayerEntity> players;
     private List<Integer> scores;
     private List<Hand> roundHands;
 
@@ -19,7 +20,7 @@ public class GameManager {
 
     public GameManager() {
         jeu = new Shifumi();
-        players = new ArrayList<String>();
+        players = new ArrayList<PlayerEntity>();
         scores = new ArrayList<Integer>();
         roundHands = new ArrayList<Hand>();
     }
@@ -28,21 +29,21 @@ public class GameManager {
         return jeu;
     }
 
-    public List<String> getPlayers() {
+    public List<PlayerEntity> getPlayers() {
         return players;
     }
 
-    public void addPlayer(String name)
+    public void addPlayer(PlayerEntity player)
     {
         if(players.size() >= 2) {
             return;
         }
-        players.add(name);
+        players.add(player);
         scores.add(0);
         roundHands.add(null);
     }
 
-    public void setPlayerHand(String player, String hand) throws Exception {
+    public void setPlayerHand(PlayerEntity player, String hand) throws Exception {
         int index = players.indexOf(player);
         if(index < 0) throw new Exception("Le joueur renseigné est introuvable");
         roundHands.set(index, HandFactory.from(hand));
@@ -55,10 +56,16 @@ public class GameManager {
         handsTillNextRound = sum;
     }
 
-    public void setPlayerScore(String playerName, int score)
+    public void setPlayerScore(PlayerEntity player, int score)
     {
-        int index = players.indexOf(playerName);
+        int index = players.indexOf(player);
         scores.set(index, score);
+    }
+
+    public Integer getPlayerScore(PlayerEntity player)
+    {
+        int index = players.indexOf(player);
+        return scores.get(index);
     }
 
     public List<String> getCurrentHands()
@@ -96,12 +103,8 @@ public class GameManager {
         return 400;
     }
 
-    public List<String> getScores()
+    public List<Integer> getScores()
     {
-        List<String> response = new ArrayList<String>();
-        for(int i = 0; i < players.size(); i++) {
-            response.add(players.get(i) + " : " + scores.get(i).toString());
-        }
-        return response;
+        return scores;
     }
 }
