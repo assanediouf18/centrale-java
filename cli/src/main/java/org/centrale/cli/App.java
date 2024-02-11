@@ -16,6 +16,8 @@ public class App {
 
     public static void main(String[] args) {
         App.CompositePatternExample();
+        // Pour tester le Shifumi décommentée la ligne suivante
+        // App.PierreFeuilleCiseau();
     }
 
     public static void CompositePatternExample() {
