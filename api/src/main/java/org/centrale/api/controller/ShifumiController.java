@@ -14,15 +14,20 @@ import java.util.Optional;
 
 @RestController
 public class ShifumiController {
+    private final PlayerRepository playerRepository;
+    private final ShifumiRepository shifumiRepository;
+
+    public ShifumiController(PlayerRepository playerRepository, ShifumiRepository shifumiRepository) {
+        this.playerRepository = playerRepository;
+        this.shifumiRepository = shifumiRepository;
+    }
 
     @PostMapping("/play")
     public String play(
             @RequestParam int player1Id,
             @RequestParam int player2Id,
             @RequestParam String handPlayer1,
-            @RequestParam String handPlayer2,
-            PlayerRepository playerRepository,
-            ShifumiRepository shifumiRepository
+            @RequestParam String handPlayer2
             ) throws Exception
     {
         Optional<PlayerEntity> query1 = playerRepository.findById(player1Id);
@@ -43,6 +48,7 @@ public class ShifumiController {
         ShifumiEntity game = this.getShifumiEntity(player1, player2, gameManager);
         shifumiRepository.save(game);
         return game.isEqual() ? "Egalité" : game.getWinner().getName() + " gagne";
+
     }
 
     private GameManager buildGameManager(
@@ -60,7 +66,7 @@ public class ShifumiController {
     }
 
     @PostMapping("/player")
-    public String addPlayer(@RequestParam String name, PlayerRepository playerRepository)
+    public String addPlayer(@RequestParam String name)
     {
         PlayerEntity newPlayer = new PlayerEntity();
         newPlayer.setName(name);
@@ -69,7 +75,7 @@ public class ShifumiController {
     }
 
     @GetMapping("/player/{id}")
-    public String getPlayer(@PathVariable int id, PlayerRepository playerRepository)
+    public String getPlayer(@PathVariable int id)
     {
         Optional<PlayerEntity> query = playerRepository.findById(id);
         if(query.isEmpty())

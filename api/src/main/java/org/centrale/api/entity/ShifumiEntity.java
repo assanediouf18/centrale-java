@@ -1,27 +1,21 @@
 package org.centrale.api.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Shifumi")
 public class ShifumiEntity {
+
     @Id
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @ManyToOne
-    private PlayerEntity winner, loser;
+    private PlayerEntity winner;
+
+    @ManyToOne
+    private PlayerEntity loser;
     boolean equal = false;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public PlayerEntity getWinner() {
         return winner;
@@ -45,5 +39,13 @@ public class ShifumiEntity {
 
     public void setEqual(boolean equal) {
         this.equal = equal;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 }
