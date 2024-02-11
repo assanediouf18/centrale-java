@@ -1,5 +1,8 @@
 package org.centrale.cli;
 
+import org.centrale.domain.filesystem.MyDirectory;
+import org.centrale.domain.filesystem.MyFile;
+import org.centrale.domain.filesystem.MyFileExplorer;
 import org.centrale.domain.newsletter.*;
 import org.centrale.domain.shifumi.Hand;
 import org.centrale.domain.shifumi.HandFactory;
@@ -12,7 +15,71 @@ import java.util.Scanner;
 public class App {
 
     public static void main(String[] args) {
-        App.NewsletterExample();
+        App.CompositePatternExample();
+    }
+
+    public static void CompositePatternExample() {
+        MyFileExplorer explorer = new MyFileExplorer();
+        System.out.println("Bienvenue dans mon Explorateur de fichiers");
+        Scanner sc = new Scanner(System.in);
+        boolean stop = false;
+        while (!stop) {
+            System.out.println("Voici les commandes possibles pour vous balader dans ce programme : ");
+            System.out.println("- path : afficher le chemin ou vous êtes");
+            System.out.println("- size : taille du dossier actuel");
+            System.out.println("- list : Liste le nombre de sous-dossiers/sous-fichiers s'il y en a");
+            System.out.println("- add : ajouter un fichier ou un dossier lorsque c'est possible");
+            System.out.println("- go : aller dans un sous dossier");
+            System.out.println("- back : revenir en arrière");
+            System.out.println("- quit : Fermer le programme");
+            System.out.println("Quelle action voulez-vous entreprendre ?");
+            String choix = sc.nextLine();
+            switch (choix) {
+                case "path":
+                    System.out.println(explorer.getCurrentPath());
+                    break;
+                case "size":
+                    System.out.println(explorer.getSizeFromCurrent());
+                    break;
+                case "list":
+                    explorer.list();
+                    break;
+                case "add":
+                    System.out.println("Fichier (1) ou Dossier (2) ?");
+                    choix = sc.nextLine();
+                    switch (choix) {
+                        case "1":
+                            System.out.println("Quel nom votre nouveau fichier aura-t-il ?");
+                            String filename = sc.nextLine();
+                            System.out.println("Quel est sa taille ?");
+                            int fileSize = sc.nextInt();
+                            explorer.add(new MyFile(filename, fileSize));
+                            System.out.println("Fichier ajouté");
+                            break;
+                        case "2":
+                            System.out.println("Quel nom votre nouveau dossier aura-t-il ?");
+                            String name = sc.nextLine();
+                            explorer.add(new MyDirectory(name));
+                            System.out.println("Dossier ajouté");
+                            break;
+                        default:
+                            System.out.println("Ajout abandonné");
+                    }
+                    break;
+                case "go":
+                    System.out.println("Où voulez-vous aller ?");
+                    String name = sc.nextLine();
+                    explorer.moveTo(name);
+                    break;
+                case "back":
+                    explorer.moveBack();
+                    break;
+                case "quit": {
+                    stop = true;
+                }break;
+                default: System.out.println("Cette commande est inconnue");
+            }
+        }
     }
 
     public static void PierreFeuilleCiseau() {
