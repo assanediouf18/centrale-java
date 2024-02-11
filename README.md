@@ -8,4 +8,5 @@
 
 ### Composite pattern
 Ce pattern est mis en oeuvre dans le package org.centrale.domain.filesystem. Il permet de récupérer la 
-taille de chaque dossier/fichier. J'ai simulé un petit explorateur de fichiers pour l'exercice.
+taille de chaque dossier/fichier. J'ai simulé un petit explorateur de fichiers pour l'exercice. Les tests de
+l'explorateur de fichier sont dans la section test du domain.
