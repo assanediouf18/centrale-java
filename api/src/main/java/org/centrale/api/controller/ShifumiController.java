@@ -3,9 +3,9 @@ package org.centrale.api.controller;
 import org.centrale.api.entity.PlayerEntity;
 import org.centrale.api.entity.ShifumiEntity;
 import org.centrale.api.repository.PlayerRepository;
+import org.centrale.api.repository.ShifumiEntityManager;
 import org.centrale.api.repository.ShifumiRepository;
 import org.centrale.api.service.GameManager;
-import org.centrale.domain.shifumi.HandFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,10 +16,16 @@ import java.util.Optional;
 public class ShifumiController {
     private final PlayerRepository playerRepository;
     private final ShifumiRepository shifumiRepository;
+    private final ShifumiEntityManager manager;
 
-    public ShifumiController(PlayerRepository playerRepository, ShifumiRepository shifumiRepository) {
+    public ShifumiController(
+            PlayerRepository playerRepository,
+            ShifumiRepository shifumiRepository,
+            ShifumiEntityManager entityManager
+            ) {
         this.playerRepository = playerRepository;
         this.shifumiRepository = shifumiRepository;
+        this.manager = entityManager;
     }
 
     @PostMapping("/play")
@@ -51,20 +57,6 @@ public class ShifumiController {
 
     }
 
-    private GameManager buildGameManager(
-            PlayerEntity player1,
-            PlayerEntity player2,
-            String handPlayer1,
-            String handPlayer2) throws Exception
-    {
-        GameManager gameManager = new GameManager();
-        gameManager.addPlayer(player1);
-        gameManager.addPlayer(player2);
-        gameManager.setPlayerHand(player1, handPlayer1);
-        gameManager.setPlayerHand(player2, handPlayer2);
-        return gameManager;
-    }
-
     @PostMapping("/player")
     public String addPlayer(@RequestParam String name)
     {
@@ -85,6 +77,21 @@ public class ShifumiController {
         return query.get().getName();
     }
 
+    @GetMapping("/game-stats")
+    public String getStats(@RequestParam int playerId1)
+    {
+        Optional<PlayerEntity> query1 = playerRepository.findById(playerId1);
+        if(query1.isEmpty()) {
+            return "Aucun utilisateur ne correspond à l'id " + playerId1;
+        }
+        PlayerEntity player1 = query1.get();
+        int victories = this.manager.getWinCount(player1);
+        int defeat = this.manager.getLoseCount(player1);
+        List<PlayerEntity> ennemy = this.manager.getWorstEnnemy(player1);
+        return victories + " victoires, " + defeat + " défaites." +
+                (ennemy.isEmpty() ? "" : ennemy.get(0).getName() + " est votre pire adversaire.");
+    }
+
     private ShifumiEntity getShifumiEntity(PlayerEntity player1, PlayerEntity player2, GameManager gameManager) {
         ShifumiEntity game = new ShifumiEntity();
         if(gameManager.getPlayerScore(player1) > gameManager.getPlayerScore(player2)) {
@@ -97,5 +104,19 @@ public class ShifumiController {
         }
         game.setEqual(Objects.equals(gameManager.getPlayerScore(player2), gameManager.getPlayerScore(player1)));
         return game;
+    }
+
+    private GameManager buildGameManager(
+            PlayerEntity player1,
+            PlayerEntity player2,
+            String handPlayer1,
+            String handPlayer2) throws Exception
+    {
+        GameManager gameManager = new GameManager();
+        gameManager.addPlayer(player1);
+        gameManager.addPlayer(player2);
+        gameManager.setPlayerHand(player1, handPlayer1);
+        gameManager.setPlayerHand(player2, handPlayer2);
+        return gameManager;
     }
 }
