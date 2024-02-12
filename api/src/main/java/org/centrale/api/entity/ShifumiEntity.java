@@ -5,15 +5,16 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "Shifumi")
 public class ShifumiEntity {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     @ManyToOne
+    @JoinColumn(name = "winner_id")
     private PlayerEntity winner;
 
     @ManyToOne
+    @JoinColumn(name = "loser_id")
     private PlayerEntity loser;
     boolean equal = false;
 
