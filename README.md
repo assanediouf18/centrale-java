@@ -15,7 +15,7 @@ taille de chaque dossier/fichier. J'ai simulé un petit explorateur de fichiers 
 l'explorateur de fichier sont dans la section test du domain.
 
 ### Visitor pattern
-Ce pattern est mis en oeuvre dans le package org.centrale.domain.shifumi. Pour tester le shifumi en lançant.
+Ce pattern est mis en oeuvre dans le package org.centrale.domain.visitor.
 
 ### Le jeu du pierre feuille ciseaux
 Il suffit de lancer l'api et tout devrait fonctionner

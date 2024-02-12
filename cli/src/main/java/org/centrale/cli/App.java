@@ -8,6 +8,10 @@ import org.centrale.domain.shifumi.Hand;
 import org.centrale.domain.shifumi.HandFactory;
 import org.centrale.domain.shifumi.Pierre;
 import org.centrale.domain.shifumi.Shifumi;
+import org.centrale.domain.visitor.BadWork;
+import org.centrale.domain.visitor.ExcellentWork;
+import org.centrale.domain.visitor.MeanTeacher;
+import org.centrale.domain.visitor.NiceTeacher;
 
 import java.util.List;
 import java.util.Scanner;
@@ -16,8 +20,8 @@ public class App {
 
     public static void main(String[] args) {
         App.CompositePatternExample();
-        // Pour tester le Shifumi décommentez la ligne suivante
-        // App.PierreFeuilleCiseau();
+        // Pour tester le Visitor Pattern décommentez la ligne suivante
+        // App.VisitorPatternExample();
     }
 
     public static void CompositePatternExample() {
@@ -117,8 +121,24 @@ public class App {
         }
     }
 
+    public static void VisitorPatternExample()
+    {
+        BadWork bad = new BadWork("Ecrit réflexif", "Assane");
+        ExcellentWork bon = new ExcellentWork("Ecrit reflexif 2", "Assane");
+
+        NiceTeacher nice = new NiceTeacher();
+        System.out.println("Les notes du gentil prof : ");
+        bad.accept(nice);
+        bon.accept(nice);
+
+        MeanTeacher mean = new MeanTeacher();
+        System.out.println("Les notes du méchant prof : ");
+        bad.accept(mean);
+        bon.accept(mean);
+    }
     public static void NewsletterExample()
     {
+        //OBSERVER PATTERN
         FanBoySubscriber fanBoy = new FanBoySubscriber();
         UnhappySubsciber unhappySubsciber = new UnhappySubsciber();
         CustomSubscriber customSubscriber = new CustomSubscriber("Jonathan", "Qu'est-ce qui est jaune et qui attend ?");
