@@ -16,3 +16,6 @@ l'explorateur de fichier sont dans la section test du domain.
 
 ### Visitor pattern
 Ce pattern est mis en oeuvre dans le package org.centrale.domain.shifumi. Pour tester le shifumi en lançant.
+
+### Le jeu du pierre feuille ciseaux
+Il suffit de lancer l'api et tout devrait fonctionner
